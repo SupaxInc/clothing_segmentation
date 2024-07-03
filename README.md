@@ -55,7 +55,9 @@ Before installing the dependencies, it's recommended to create a virtual environ
 
 # Results
 
-![alt text](resources/UNet/result.png)
+![alt text](results/show_result/result.png)
+
+![alt text](results/show_result/segmentation.png)
 
 # Citations
 Dataset from: https://github.com/bearpaw/clothing-co-parsing
