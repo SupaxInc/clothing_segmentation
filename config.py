@@ -15,6 +15,8 @@ TRAIN_IMG_DIR = "data/train/images/"
 TRAIN_MASK_DIR = "data/train/masks/"
 VAL_IMG_DIR = "data/validations/images/"
 VAL_MASK_DIR = "data/validations/masks/"
+
+# TODO: Convert this to a better data structure
 CLASS_MAPPING = {
     0: [0],  # Background => [Background]
     1: [41],  # Skin => [Skin]
