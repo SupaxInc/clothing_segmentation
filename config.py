@@ -25,7 +25,7 @@ CLASS_MAPPING = {
     4: [25, 27, 30, 31, 40, 42, 53],  # Bottoms => [Jeans, Leggings, Panties, Pants, Shorts, Skirt, Tights]
     5: [7, 12, 16, 21, 28, 32, 36, 39, 43, 44, 58],  # Footwear => [Boots, Clogs, Flats, Heels, Loafers, Pumps, Sandals, Shoes, Sneakers, Socks, Wedges]
     6: [1, 2, 3, 9, 10, 15, 17, 18, 20, 23, 29, 33, 34, 37, 45, 47, 52, 56, 57],  # Accessories => [Accessories, Bag, Belt, Bracelet, Cape, Earrings, Glasses, Gloves, Hat, Intimate, Necklace, Purse, Ring, Scarf, Stockings, Sunglasses, Tie, Wallet, Watch]
-}
+} # TODO: Scarves seem to be failing a lot
 CLASS_MAPPING_NAMING = {
     0: "Background",
     1: "Skin",
