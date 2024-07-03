@@ -45,7 +45,7 @@ def train_fn(loader, model, optimizer, loss_fn, scaler):
 
     # Calculate a batch of images and masks at once
     for batch_idx, (data, targets) in enumerate(batch):
-        data = data.to(device=DEVICE) # Assigning images batch to appropriate device (CPU or GPU)
+        data = data.to(device=DEVICE) # Assigning original images batch to appropriate device (CPU or GPU)
         targets = targets.long().to(device=DEVICE) # Assigning one hot encoded masks to device (may need to reshape data depending on what loss_fn uses)
 
         # Forward pass to generate predictions and calculate loss using autocasting
@@ -101,7 +101,7 @@ def main():
     model = UNet(in_channels=3, out_channels=NUM_CLASSES).to(DEVICE)
     
     optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
-    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.2, patience=10, verbose=True, min_lr = MIN_LEARNING_RATE)
+    scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10, verbose=True, min_lr = MIN_LEARNING_RATE)
 
     train_loader, val_loader = get_loaders( 
         TRAIN_IMG_DIR,
@@ -122,7 +122,7 @@ def main():
     if LOAD_MODEL:
         load_checkpoint(torch.load("my_checkpoint.pth.tar"), model)
     
-    check_accuracy(val_loader, model, NUM_CLASSES, device=DEVICE)
+    check_accuracy(val_loader, model, NUM_CLASSES, device=DEVICE, weights=class_weights)
     scaler = torch.cuda.amp.GradScaler()
 
     # An epoch is one complete pass through the entire dataset
@@ -133,6 +133,7 @@ def main():
         checkpoint = {
             "state_dict": model.state_dict(),
             "optimizer": optimizer.state_dict(),
+            "class_weights": class_weights,
         }
         save_checkpoint(checkpoint)
 
